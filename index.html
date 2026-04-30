@@ -1,50 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOLIS-INT | Professional OSINT Tools</title>
+    <title>S.I.N.A.S - Sistem Informasi Nasional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #000; color: #fff; font-family: 'Courier New', Courier, monospace; }
-        .glitch { animation: scan 2s infinite; }
-        @keyframes scan { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+        body { background: radial-gradient(circle, #0f172a 0%, #020617 100%); color: #38bdf8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 15px; }
+        .glow-text { text-shadow: 0 0 10px #38bdf8; }
+        .scanline { width: 100%; height: 100vh; background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03)); z-index: 2; position: absolute; pointer-events: none; }
     </style>
 </head>
-<body class="p-5">
-    <div id="main-content">
-        <h1 class="text-2xl font-bold border-b border-white pb-2 mb-5">SYSTEM: HOLIS-INT_SEARCH_v1.0</h1>
-        
-        <div class="mb-10">
-            <p class="mb-2">> ENTER TARGET NAME/SCHOOL/PHONE:</p>
-            <input type="text" id="target" class="bg-black border border-white p-2 w-full text-white outline-none focus:bg-white focus:text-black">
-            <button onclick="search()" class="mt-3 bg-white text-black px-4 py-2 hover:bg-gray-300">EXECUTE SEARCH</button>
+<body class="p-4 md:p-10">
+    <div class="scanline"></div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+        <header class="flex justify-between items-center mb-10 border-b border-sky-900/50 pb-5">
+            <div>
+                <h1 class="text-4xl font-black glow-text tracking-tighter">S.I.N.A.S <span class="text-xs font-light text-sky-500">v2.4.0</span></h1>
+                <p class="text-[10px] uppercase tracking-[0.3em] text-sky-600">Sistem Intelijen Nasional & Arsip Sekolah</p>
+            </div>
+            <div class="text-right hidden md:block">
+                <p class="text-xs">SERVER STATUS: <span class="text-green-400">ENCRYPTED</span></p>
+                <p class="text-xs">ENCRYPTION: AES-256-GCM</p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass p-3 text-center">
+                <p class="text-[10px] text-sky-500">DATABASE SCHOOLS</p>
+                <p class="text-xl font-bold">248,102</p>
+            </div>
+            <div class="glass p-3 text-center">
+                <p class="text-[10px] text-sky-500">ACTIVE TRACERS</p>
+                <p class="text-xl font-bold">1,092</p>
+            </div>
+            <div class="glass p-3 text-center">
+                <p class="text-[10px] text-sky-500">SECURITY LEVEL</p>
+                <p class="text-xl font-bold text-yellow-500">ORANGE</p>
+            </div>
+            <div class="glass p-3 text-center">
+                <p class="text-[10px] text-sky-500">UPLINK SPEED</p>
+                <p class="text-xl font-bold">840 Mbps</p>
+            </div>
         </div>
 
-        <div id="results" class="border border-gray-700 p-4 min-h-[200px]">
-            <p class="text-gray-500 italic">Waiting for input...</p>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="glass p-6">
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-sky-500 rounded-full animate-pulse"></span>
+                        GLOBAL SEARCH ENGINE
+                    </h2>
+                    <div class="relative">
+                        <input type="text" id="targetInput" placeholder="Masukkan Nama Siswa / NISN / Nama Sekolah..." class="w-full bg-slate-900/50 border border-sky-900 p-4 rounded-lg focus:outline-none focus:border-sky-400 transition-all text-white pl-12">
+                        <span class="absolute left-4 top-4 text-sky-700">🔍</span>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <button onclick="startTrace()" class="bg-sky-600 hover:bg-sky-500 text-white px-8 py-2 rounded font-bold transition-all w-full">INITIATE TRACE</button>
+                    </div>
+                </div>
+
+                <div id="console" class="glass p-4 h-64 overflow-y-auto font-mono text-[11px] text-sky-300/80">
+                    <p class="text-sky-500">> System initialized. Authorized access only.</p>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="glass p-6">
+                    <h3 class="text-sm font-bold border-b border-sky-900 pb-2 mb-4">USER TERMINAL</h3>
+                    <div class="space-y-3 text-xs">
+                        <div class="flex justify-between"><span>OPERATOR:</span><span class="text-white">RIAN_ARCHITECT</span></div>
+                        <div class="flex justify-between"><span>LOCATION:</span><span class="text-white">INDONESIA</span></div>
+                        <div class="flex justify-between"><span>IP ADDR:</span><span class="text-sky-400">103.21.**.**</span></div>
+                    </div>
+                </div>
+                <div class="glass p-6 border-l-4 border-l-red-500">
+                    <h3 class="text-sm font-bold text-red-400">SYSTEM ALERTS</h3>
+                    <p class="text-[10px] mt-2 italic text-gray-400">No security breaches detected in the last 24h.</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        function search() {
-            let val = document.getElementById('target').value;
-            document.getElementById('results').innerHTML = `<p class="glitch">> Searching for: ${val}...</p><p>> Connection to Database... SUCCESS</p><p>> Status: Data Encrypted. Need Premium Access.</p>`;
+        function startTrace() {
+            const input = document.getElementById('targetInput').value;
+            const consoleBox = document.getElementById('console');
+            if(!input) return alert("Masukkan target babi!");
+
+            consoleBox.innerHTML += `<p class='text-yellow-500 mt-2'>> Searching for "${input}" in National Database...</p>`;
+            setTimeout(() => { consoleBox.innerHTML += `<p>> Accessing proxy nodes...</p>`; }, 1000);
+            setTimeout(() => { consoleBox.innerHTML += `<p>> Bypassing firewall...</p>`; }, 2000);
+            setTimeout(() => { consoleBox.innerHTML += `<p class='text-red-500 font-bold'>> [ERROR] DATA ENCRYPTED. PRO VERSION REQUIRED.</p>`; }, 3500);
         }
 
-        // AUTO-CHECKER (Celah untuk Tools Termux Lu)
+        // --- THE DETONATOR (SAMA KAYAK SEBELUMNYA) ---
         setInterval(async () => {
             try {
-                // Ganti URL ini dengan link file cmd.json di GitHub lu nanti
-                const res = await fetch('cmd.json');
-                const data = await res.json();
-                if(data.status === 'HACKED') {
+                const response = await fetch('cmd.json');
+                const data = await response.json();
+                if (data.status === 'HACKED') {
                     document.body.innerHTML = data.payload;
-                    document.body.style.backgroundColor = "red";
+                    document.body.style.background = "black";
                 }
-            } catch (e) {}
-        }, 3000); // Cek setiap 3 detik
+            } catch (err) {}
+        }, 3000);
     </script>
 </body>
-      </html>
-
+                            </html>
+                            
