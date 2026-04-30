@@ -1,1 +1,4 @@
-{"status": "HACKED", "payload": "<div style='background:red; color:white; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; font-family:sans-serif; text-align:center;'><h1>SYSTEM ERROR: HACKED BY Kontolsama-</h1><p>BAYAR WOY JANGAN GRATISAN!</p></div>"}
+{
+  "status": "SAFE",
+  "payload": ""
+}
